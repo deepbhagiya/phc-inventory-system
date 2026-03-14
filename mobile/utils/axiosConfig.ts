@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getItemAsync } from './storage';
 
-// Replace with your production URL once deployed (e.g., https://phc-inventory-api.onrender.com)
-const BASE_URL = 'http://10.147.67.222:5000';
+// Live Production URL on Render
+const BASE_URL = 'https://phc-inventory-system.onrender.com';
 
 const api = axios.create({
   baseURL: BASE_URL,
