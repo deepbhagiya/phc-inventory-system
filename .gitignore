@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Server
+server/database.sqlite
+server/.env
+server/check_users.js
+
+# Mobile
+mobile/node_modules/
+mobile/.expo/
+mobile/android/
+mobile/ios/
+mobile/web-build/
+mobile/dist/
+
+# Misc
+.DS_Store
+*.log
+tmp/
+C/tmp/
