@@ -34,7 +34,27 @@ Supplier.hasMany(Reorder, { foreignKey: 'supplierId' });
 
 // Connect to DB
 sequelize.sync({ alter: true })
-  .then(() => console.log('Database connected...'))
+  .then(async () => {
+    console.log('Database connected...');
+    // Auto-seed if no users exist
+    const userCount = await User.count();
+    if (userCount === 0) {
+      console.log('No users found. Seeding default users...');
+      await User.create({
+        username: 'admin',
+        password: 'adminpassword',
+        role: 'admin',
+        fullName: 'System Administrator'
+      });
+      await User.create({
+        username: 'pharmacist',
+        password: 'pharmacistpassword',
+        role: 'staff',
+        fullName: 'Head Pharmacist'
+      });
+      console.log('Default users seeded.');
+    }
+  })
   .catch(err => console.log('Error: ' + err));
 
 const app = express();

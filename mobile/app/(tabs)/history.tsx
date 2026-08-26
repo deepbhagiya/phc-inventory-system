@@ -20,7 +20,9 @@ type Transaction = {
   transactionDate: string;
   createdAt: string;
   Medicine?: { name: string };
+  medicine?: { name: string };
   User?: { username: string };
+  user?: { username: string };
 };
 
 type GroupedEntry = {
@@ -46,7 +48,7 @@ function groupTransactions(transactions: Transaction[]): GroupedEntry[] {
           type: 'OUT',
           transactions: [],
           date: t.transactionDate || t.createdAt,
-          by: t.User?.username ?? '—',
+          by: t.User?.username || t.user?.username || '—',
           patientName: t.patientName,
           patientGender: t.patientGender,
           doctorName: t.doctorName,
@@ -61,7 +63,7 @@ function groupTransactions(transactions: Transaction[]): GroupedEntry[] {
         type: t.type,
         transactions: [t],
         date: t.transactionDate || t.createdAt,
-        by: t.User?.username ?? '—',
+        by: t.User?.username || t.user?.username || '—',
       };
     }
   });
@@ -147,7 +149,7 @@ export default function HistoryScreen() {
           {item.transactions.map(t => (
             <View key={t.id} style={styles.medRow}>
               <Package color="#555" size={13} style={{ marginRight: 6 }} />
-              <Text style={styles.medRowName}>{t.Medicine?.name ?? 'Unknown'}</Text>
+              <Text style={styles.medRowName}>{t.Medicine?.name || t.medicine?.name || t.reason || 'Unknown Medicine'}</Text>
               <Text style={[styles.medRowQty, isOut ? styles.medRowQtyOut : styles.medRowQtyIn]}>
                 {isOut ? `−${t.quantity}` : `+${t.quantity}`}
               </Text>

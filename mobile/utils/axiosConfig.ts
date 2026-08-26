@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getItemAsync } from './storage';
 
-// Live Production URL on Render
-const BASE_URL = 'https://phc-inventory-system.onrender.com';
+// Local Development URL (pointing to emulator host loopback)
+const BASE_URL = 'http://10.0.2.2:5000';
 
 const api = axios.create({
   baseURL: BASE_URL,
